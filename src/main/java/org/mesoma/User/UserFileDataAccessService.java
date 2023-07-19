@@ -28,7 +28,7 @@ public class UserFileDataAccessService implements UserDaoInterface {
         return users;
     }
 
-    public void addNewUser(User user){
+    protected void addNewUser(User user){
         //check if UUID is not taken
         for (User value : users) {
             if (user.getUserId().equals(value.getUserId())) {

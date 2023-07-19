@@ -25,7 +25,6 @@ public class Main {
         //Instantiate Data stores
         CarDAO carDAO = new CarDAO();
         UserFakerDataAccessService userFakerDataAccessService = new UserFakerDataAccessService();
-        userFakerDataAccessService.addNewUser(new User("Mamba"));
         CarBookingDAO carBookingDAO = new CarBookingDAO();
         //create new cars
         Car toyota = new Car("1234",80.05, Brand.TOYOTA, true);
@@ -34,6 +33,7 @@ public class Main {
         //instantiate service classes
         CarService carService = new CarService(carDAO);
         UserService userService = new UserService(userFakerDataAccessService);
+        userService.addNewUser(new User("Mamba"));
         CarBookingService carBookingService = new CarBookingService(carBookingDAO, carService);
         //add cars
         carService.addNewCar(toyota);

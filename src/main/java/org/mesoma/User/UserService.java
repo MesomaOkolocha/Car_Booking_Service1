@@ -30,4 +30,8 @@ public class UserService {
             throw new NullPointerException();
         }
     }
+
+    public void addNewUser(User user){
+        userFakerDataAccessService.addNewUser(user);
+    }
 }
