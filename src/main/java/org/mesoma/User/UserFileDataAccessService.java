@@ -6,13 +6,11 @@ import java.util.*;
 
 //Data access class for users, we are going to store users using an array
 public class UserFileDataAccessService implements UserDaoInterface {
-    File FILE = new File(Objects.requireNonNull(getClass().
-            getClassLoader().getResource("users.csv")).getPath());
 
-    //retrieve users from the database
-    @Override
-    public List<User> getUsers(){
-        List<User> users = new ArrayList<>();
+    static List<User> users = new ArrayList<>();
+    static {
+        File FILE = new File(Objects.requireNonNull(UserFileDataAccessService.class.
+                getClassLoader().getResource("users.csv")).getPath());
         try {
             Scanner scanner = new Scanner(FILE);
             while (scanner.hasNext()) {
@@ -20,9 +18,25 @@ public class UserFileDataAccessService implements UserDaoInterface {
                 users.add(new User(UUID.fromString(data[0]), data[1]));
             }
             scanner.close(); // Close the scanner after reading the file
-            return users;
         } catch (IOException e ) {
             throw new IllegalStateException(e);
         }
     }
+
+    @Override
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void addNewUser(User user){
+        //check if UUID is not taken
+        for (User value : users) {
+            if (user.getUserId().equals(value.getUserId())) {
+                System.out.println("UserId taking\n" + "Reassigning userId...");
+                user.setUserId(UUID.randomUUID());
+            }
+        }
+        users.add(user);
+    }
+
 }

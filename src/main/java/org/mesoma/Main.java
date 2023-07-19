@@ -24,7 +24,6 @@ public class Main {
         // write your code here
         //Instantiate Data stores
         CarDAO carDAO = new CarDAO();
-        //UserFileDataAccessService userFileDataAccessService = new UserFileDataAccessService();
         UserFakerDataAccessService userFakerDataAccessService = new UserFakerDataAccessService();
         userFakerDataAccessService.addNewUser(new User("Mamba"));
         CarBookingDAO carBookingDAO = new CarBookingDAO();
