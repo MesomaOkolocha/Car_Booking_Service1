@@ -15,7 +15,6 @@ public class UserService {
         this.userFakerDataAccessService = userFakerDataAccessService;
     }
 
-
     //retrieve All Users from database
     public List<User> getUsers(){
         return (userFakerDataAccessService.getUsers());

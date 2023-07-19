@@ -26,6 +26,7 @@ public class Main {
         CarDAO carDAO = new CarDAO();
         //UserFileDataAccessService userFileDataAccessService = new UserFileDataAccessService();
         UserFakerDataAccessService userFakerDataAccessService = new UserFakerDataAccessService();
+        userFakerDataAccessService.addNewUser(new User("Mamba"));
         CarBookingDAO carBookingDAO = new CarBookingDAO();
         //create new cars
         Car toyota = new Car("1234",80.05, Brand.TOYOTA, true);
