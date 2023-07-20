@@ -7,8 +7,7 @@ import org.mesoma.Cars.Car;
 import org.mesoma.Cars.CarDAO;
 import org.mesoma.Cars.CarService;
 import org.mesoma.User.User;
-import org.mesoma.User.UserFakerDataAccessService;
-import org.mesoma.User.UserFileDataAccessService;
+import org.mesoma.User.UserFakerDataAccessRepository;
 import org.mesoma.User.UserService;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class Main {
         // write your code here
         //Instantiate Data stores
         CarDAO carDAO = new CarDAO();
-        UserFakerDataAccessService userFakerDataAccessService = new UserFakerDataAccessService();
+        UserFakerDataAccessRepository userFakerDataAccessRepository = new UserFakerDataAccessRepository();
         CarBookingDAO carBookingDAO = new CarBookingDAO();
         //create new cars
         Car toyota = new Car("1234",80.05, Brand.TOYOTA, true);
@@ -32,7 +31,7 @@ public class Main {
         Car hyundai = new Car("1236",80.05,Brand.HYUNDAI, false);
         //instantiate service classes
         CarService carService = new CarService(carDAO);
-        UserService userService = new UserService(userFakerDataAccessService);
+        UserService userService = new UserService(userFakerDataAccessRepository);
         userService.addNewUser(new User("Mamba"));
         CarBookingService carBookingService = new CarBookingService(carBookingDAO, carService);
         //add cars

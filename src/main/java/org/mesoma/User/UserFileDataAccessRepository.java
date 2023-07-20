@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.util.*;
 
 //Data access class for users, we are going to store users using an array
-public class UserFileDataAccessService implements UserDaoInterface {
+public class UserFileDataAccessRepository implements UserDaoInterface {
 
     static List<User> users = new ArrayList<>();
     static {
-        File FILE = new File(Objects.requireNonNull(UserFileDataAccessService.class.
+        File FILE = new File(Objects.requireNonNull(UserFileDataAccessRepository.class.
                 getClassLoader().getResource("users.csv")).getPath());
         try {
             Scanner scanner = new Scanner(FILE);

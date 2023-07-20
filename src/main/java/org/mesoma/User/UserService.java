@@ -6,23 +6,23 @@ import java.util.UUID;
 //Service class for User
 public class UserService {
 
-    private UserFileDataAccessService userFileDataAccessService;
-    private UserFakerDataAccessService userFakerDataAccessService;
-    public UserService(UserFileDataAccessService userFileDataAccessService) {
-        this.userFileDataAccessService = userFileDataAccessService;
+    private UserFileDataAccessRepository userFileDataAccessRepository;
+    private UserFakerDataAccessRepository userFakerDataAccessRepository;
+    public UserService(UserFileDataAccessRepository userFileDataAccessRepository) {
+        this.userFileDataAccessRepository = userFileDataAccessRepository;
     }
-    public UserService(UserFakerDataAccessService userFakerDataAccessService){
-        this.userFakerDataAccessService = userFakerDataAccessService;
+    public UserService(UserFakerDataAccessRepository userFakerDataAccessRepository){
+        this.userFakerDataAccessRepository = userFakerDataAccessRepository;
     }
 
     //retrieve All Users from database
     public List<User> getUsers(){
-        return (userFakerDataAccessService.getUsers());
+        return (userFakerDataAccessRepository.getUsers());
     }
 
     //retrieve a specific user from database
     public User getUserById(UUID userId){
-        List<User> users = userFakerDataAccessService.getUsers();
+        List<User> users = userFakerDataAccessRepository.getUsers();
         try{
             //used java streams for functional programming for fast processing
             return users.stream().filter(user -> user.getUserId().equals(userId)).findFirst().orElse(null);
@@ -32,6 +32,6 @@ public class UserService {
     }
 
     public void addNewUser(User user){
-        userFakerDataAccessService.addNewUser(user);
+        userFakerDataAccessRepository.addNewUser(user);
     }
 }

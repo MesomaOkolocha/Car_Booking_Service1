@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class UserFakerDataAccessService implements UserDaoInterface{
+public class UserFakerDataAccessRepository implements UserDaoInterface{
     static List<User> users = new ArrayList<>();
 
     static{
