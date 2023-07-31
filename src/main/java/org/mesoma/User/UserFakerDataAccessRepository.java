@@ -1,5 +1,6 @@
 package org.mesoma.User;
 import com.github.javafaker.Faker;
+import org.mesoma.utils.UserIdExistsException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,7 @@ public class UserFakerDataAccessRepository implements UserDaoInterface{
         //check if UUID is not taken
         for (User value : users) {
             if (user.getUserId().equals(value.getUserId())) {
-                System.out.println("UserId taking\n" + "Reassigning userId...");
-                user.setUserId(UUID.randomUUID());
+                throw new UserIdExistsException("User Id taken, Use a different User Id");
             }
         }
         users.add(user);

@@ -15,6 +15,7 @@ public class User {
         this.firstName = firstName;
     }
 
+    //This constructor is used when we are given users with userId and firstName provided
     public User(UUID userId, String firstName) {
         this.userId = userId;
         this.firstName = firstName;
@@ -27,14 +28,6 @@ public class User {
 
     public void setUserId(UUID userId) {
         this.userId = userId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     @Override

@@ -6,11 +6,8 @@ import java.util.UUID;
 //Service class for User
 public class UserService {
 
-    private UserFileDataAccessRepository userFileDataAccessRepository;
     private UserFakerDataAccessRepository userFakerDataAccessRepository;
-    public UserService(UserFileDataAccessRepository userFileDataAccessRepository) {
-        this.userFileDataAccessRepository = userFileDataAccessRepository;
-    }
+
     public UserService(UserFakerDataAccessRepository userFakerDataAccessRepository){
         this.userFakerDataAccessRepository = userFakerDataAccessRepository;
     }

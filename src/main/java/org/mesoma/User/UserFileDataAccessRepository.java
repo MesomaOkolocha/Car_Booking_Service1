@@ -1,5 +1,7 @@
 package org.mesoma.User;
 
+import org.mesoma.utils.UserIdExistsException;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -32,8 +34,7 @@ public class UserFileDataAccessRepository implements UserDaoInterface {
         //check if UUID is not taken
         for (User value : users) {
             if (user.getUserId().equals(value.getUserId())) {
-                System.out.println("UserId taking\n" + "Reassigning userId...");
-                user.setUserId(UUID.randomUUID());
+                throw new UserIdExistsException("User Id taken, Use a different User Id");
             }
         }
         users.add(user);
