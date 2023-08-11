@@ -3,7 +3,7 @@ package org.mesoma.Bookings;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarBookingDAO {
+public class CarBookingDAO implements CarBookingDaoInterface{
     private static final List<CarBooking> bookings;
 
     static{
