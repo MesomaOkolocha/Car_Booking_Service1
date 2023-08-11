@@ -1,11 +1,8 @@
 package org.mesoma.User;
 
 import org.mesoma.utils.UserIdException;
-
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-
 //Service class for User
 public class UserService {
     private final UserDaoInterface userDaoInterface;
