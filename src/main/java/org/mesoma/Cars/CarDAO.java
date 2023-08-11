@@ -3,7 +3,7 @@ package org.mesoma.Cars;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarDAO {
+public class CarDAO implements CarDaoInterface {
     private final static List<Car> cars;
 
     static{
