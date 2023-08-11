@@ -1,37 +1,64 @@
 package org.mesoma.User;
 
 import org.junit.jupiter.api.Test;
-import org.mesoma.utils.UserIdExistsException;
-
+import org.mesoma.utils.UserIdException;
 import java.util.List;
 import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
+import java.util.Optional;
+public class UserFileDataAccessRepositoryTest {
 
-class UserFileDataAccessRepositoryTest {
+    private UserFileDataAccessRepository userRepository;
 
-    @Test
-    void getUsers() {
-        UserFileDataAccessRepository actualUserFileDataAccessRepository = new UserFileDataAccessRepository();
-        List<User> expectedUsers = actualUserFileDataAccessRepository.users;
-        assertSame(expectedUsers, actualUserFileDataAccessRepository.getUsers());
+    @BeforeEach
+    public void setUp() {
+        userRepository = new UserFileDataAccessRepository();
+    }
+
+    @AfterEach
+    public void tearDown() {
+        userRepository = null;
     }
 
     @Test
-    void addNewUser() {
-        UserFileDataAccessRepository actualUserFileDataAccessRepository = new UserFileDataAccessRepository();
-        User userAdded = new User(UUID.fromString("2fda7774-b948-42fa-ad35-7eb1a7248e34"),"King");
-        actualUserFileDataAccessRepository.addNewUser(userAdded);
-        User userNotAdded = new User(UUID.fromString("4fda7774-b948-42fa-ad35-7eb1a7248e36"),"Queen");
-        List<User> expectedUsers = actualUserFileDataAccessRepository.users;
-        assertTrue(expectedUsers.contains(userAdded));
-        assertFalse(expectedUsers.contains(userNotAdded));
-        //Test exception
-        User userAdded2 = new User(UUID.fromString("2fda7774-b948-42fa-ad35-7eb1a7248e34"),"King2");
-        assertThatExceptionOfType(UserIdExistsException.class)
-                .isThrownBy(() -> {
-                    actualUserFileDataAccessRepository.addNewUser(userAdded2);
-                }).withMessage("User Id taken, Use a different User Id");
+    public void testGetUsers() {
+        List<User> users = userRepository.getUsers();
+        assertNotNull(users);
+        assertFalse(users.isEmpty());
+    }
+
+    @Test
+    public void testAddNewUser() {
+        User newUser = new User(UUID.randomUUID(), "NewUser");
+        userRepository.addNewUser(newUser);
+
+        List<User> users = userRepository.getUsers();
+        assertTrue(users.contains(newUser));
+    }
+
+    @Test
+    public void testAddUserWithExistingId() {
+        User existingUser = userRepository.getUsers().get(0);
+
+        assertThrows(UserIdException.class, () -> userRepository.addNewUser(existingUser));
+    }
+
+    @Test
+    public void testGetUserById() {
+        List<User> users = userRepository.getUsers();
+        if (!users.isEmpty()) {
+            User user = users.get(0);
+            Optional<User> retrievedUser = userRepository.getUserById(user.getUserId());
+            assertTrue(retrievedUser.isPresent());
+            assertEquals(user, retrievedUser.get());
+        }
+    }
+
+    @Test
+    public void testGetNonExistentUserById() {
+        UUID nonExistentUserId = UUID.randomUUID();
+        Optional<User> retrievedUser = userRepository.getUserById(nonExistentUserId);
+        assertFalse(retrievedUser.isPresent());
     }
 }

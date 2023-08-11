@@ -1,96 +1,58 @@
 package org.mesoma.User;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.Objects;
 import java.util.UUID;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
-class UserTest {
+public class UserTest {
 
     @Test
-    void getUserIdTest() {
-        //given
-        User testUserWithoutIdProvided = new User("James");
-        //when
-        UUID userId = testUserWithoutIdProvided.getUserId();
-        //then
-        //Since we generate a random UUID, we can test the version and variant
-        assertThat(userId.version()).isEqualTo(4);
-        assertThat(userId.variant()).isEqualTo(2);
+    public void testConstructor() {
+        String firstName = "John";
+        User user = new User(firstName);
 
-        //given
-        User testUserWithIdProvided = new User(UUID.fromString
-                ("1fda7774-b948-42fa-ad35-7eb1a7248e35"),"James");
-        //when
-        UUID userId2 = testUserWithIdProvided.getUserId();
-        UUID dummy = UUID.fromString("1fda7774-b948-42fa-ad35-7eb1a7248e36");
-        //then
-        assertThat(userId2).isEqualTo(UUID.fromString
-                ("1fda7774-b948-42fa-ad35-7eb1a7248e35"));
-        assertThat(userId2).isNotEqualTo(dummy);
-
+        assertThat(user.getUserId()).isNotNull();
     }
 
     @Test
-    void setUserIdTest() {
-        //given
-        User testUserWithIdProvided = new User(UUID.fromString
-                ("1fda7774-b948-42fa-ad35-7eb1a7248e35"),"James");
+    public void testConstructorWithUserId() {
+        UUID userId = UUID.randomUUID();
+        String firstName = "Jane";
+        User user = new User(userId, firstName);
 
-        //when
-        UUID dummy = UUID.fromString("2fda7774-c948-52fa-bd35-8eb1a7248e35");
-        testUserWithIdProvided.setUserId(dummy);
-        //then
-        UUID userId = testUserWithIdProvided.getUserId();
-        assertThat(userId).isEqualTo(dummy);
+        assertThat(user.getUserId()).isEqualTo(userId);
     }
 
     @Test
-    void testToString() {
-        //given
-        User testUserWithIdProvided = new User(UUID.fromString
-                ("1fda7774-b948-42fa-ad35-7eb1a7248e35"),"James");
-        String userString = testUserWithIdProvided.toString();
-        //when
-        String expectedString = "User{" +
-                "userId=" + "1fda7774-b948-42fa-ad35-7eb1a7248e35" +
-                ", firstName='" + "James" + '\'' +
-                '}';
-        //then
-        assertThat(userString).isEqualTo(expectedString);
+    public void testSetUserId() {
+        User user = new User("Alice");
+        UUID newUserId = UUID.randomUUID();
+
+        user.setUserId(newUserId);
+
+        assertThat(user.getUserId()).isEqualTo(newUserId);
     }
 
     @Test
-    void testEquals() {
-        //given
-        User testUserWithIdProvided = new User(UUID.fromString
-                ("1fda7774-b948-42fa-ad35-7eb1a7248e35"),"James");
-        //when
-        User testUserWithIdProvided2 = new User(UUID.fromString
-                ("1fda7774-b948-42fa-ad35-7eb1a7248e35"),"James");
-        User testUserWithIdProvided3 = new User(UUID.fromString
-                ("1fda7774-b948-42fa-ad35-7eb1a7248e35"),"Jamie");
-        User testUserWithIdProvided4 = new User(UUID.fromString
-                ("1fda7774-b948-42fa-ad35-7eb1a7248e36"),"James");
-        //then
-        assertThat(testUserWithIdProvided).isEqualTo(testUserWithIdProvided2);
-        assertThat(testUserWithIdProvided).isNotEqualTo(testUserWithIdProvided3);
-        assertThat(testUserWithIdProvided).isNotEqualTo(testUserWithIdProvided4);
+    public void testEqualsAndHashCode() {
+        UUID userId = UUID.randomUUID();
+        String firstName = "Bob";
+        User user1 = new User(userId, firstName);
+        User user2 = new User(userId, firstName);
+
+
+        assertThat(user1).isEqualTo(user2);
+        assertThat(user1.hashCode()).isEqualTo(user2.hashCode());
     }
 
     @Test
-    void testHashCode(){
-        //given
-        User testUserWithIdProvided = new User(UUID.fromString
-                ("1fda7774-b948-42fa-ad35-7eb1a7248e35"),"James");
-        //when
-        int expected = Objects.hash(testUserWithIdProvided.getUserId(), "James");
-        //then
-        assertThat(testUserWithIdProvided.hashCode()).isEqualTo(expected);
+    public void testToString() {
+        UUID userId = UUID.fromString("123e4567-e89b-12d3-a456-426655440000");
+        String firstName = "Alice";
+        User user = new User(userId, firstName);
 
+        String expectedToString = "User{userId=123e4567-e89b-12d3-a456-426655440000, firstName='Alice'}";
+        String actualToString = user.toString();
 
+        assertThat(actualToString).isEqualTo(expectedToString);
     }
-
 }

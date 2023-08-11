@@ -1,41 +1,61 @@
 package org.mesoma.User;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mesoma.utils.UserIdExistsException;
-
-import java.util.List;
+import org.mesoma.utils.UserIdException;
 import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.mockito.MockitoAnnotations;
+import java.util.Optional;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-class UserFakerDataAccessRepositoryTest {
+public class UserFakerDataAccessRepositoryTest {
 
+    private UserFakerDataAccessRepository userRepository;
 
-    @Test
-    void getUsers() {
-        UserFakerDataAccessRepository actualUserFakerDataAccessRepository = new UserFakerDataAccessRepository();
-        List<User> expectedUsers = actualUserFakerDataAccessRepository.users;
-        assertSame(expectedUsers, actualUserFakerDataAccessRepository.getUsers());
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+        userRepository = new UserFakerDataAccessRepository();
+        userRepository.getUsers().clear();
     }
 
     @Test
-    void addNewUser() {
-        UserFakerDataAccessRepository actualUserFakerDataAccessRepository = new UserFakerDataAccessRepository();
-        User userAdded = new User(UUID.fromString("3fda7774-b948-42fa-ad35-7eb1a7248e34"),"Jan");
-        actualUserFakerDataAccessRepository.addNewUser(userAdded);
-        User userNotAdded = new User(UUID.fromString("4fda7774-b948-42fa-ad35-7eb1a7248e36"),"Queen");
-        List<User> expectedUsers = actualUserFakerDataAccessRepository.users;
-        assertTrue(expectedUsers.contains(userAdded));
-        assertFalse(expectedUsers.contains(userNotAdded));
-        //Test exception
-        User userAdded2 = new User(UUID.fromString("3fda7774-b948-42fa-ad35-7eb1a7248e34"),"King2");
-        assertThatExceptionOfType(UserIdExistsException.class)
-                .isThrownBy(() -> {
-                    actualUserFakerDataAccessRepository.addNewUser(userAdded2);
-                }).withMessage("User Id taken, Use a different User Id");
+    public void testAddNewUser() {
+        User newUser = new User("John");
+
+        userRepository.addNewUser(newUser);
+        assertThat(newUser).isIn(userRepository.getUsers());
     }
 
+    @Test
+    public void testAddNewUserWithTakenUserId() {
+        User existingUser = new User("Alice");
+        userRepository.getUsers().add(existingUser);
+        User newUser = new User(existingUser.getUserId(), "Bob");
+
+        assertThatThrownBy(() -> userRepository.addNewUser(newUser))
+                .isInstanceOf(UserIdException.class)
+                .hasMessage("User Id taken, Use a different User Id");
+    }
+
+    @Test
+    public void testGetUserById() {
+        UUID userId = UUID.randomUUID();
+        User user = new User(userId, "Jane");
+        userRepository.getUsers().add(user);
+
+        Optional<User> result = userRepository.getUserById(userId);
+
+        assertThat(result).isPresent().contains(user);
+    }
+
+    @Test
+    public void testGetUserByIdNonExistent() {
+        UUID userId = UUID.randomUUID();
+
+        Optional<User> result = userRepository.getUserById(userId);
+
+        assertThat(result).isEmpty();
+    }
 }

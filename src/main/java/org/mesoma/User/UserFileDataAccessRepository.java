@@ -1,6 +1,6 @@
 package org.mesoma.User;
 
-import org.mesoma.utils.UserIdExistsException;
+import org.mesoma.utils.UserIdException;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,14 +30,18 @@ public class UserFileDataAccessRepository implements UserDaoInterface {
         return users;
     }
 
-    protected void addNewUser(User user){
+    public void addNewUser(User user){
         //check if UUID is not taken
         for (User value : users) {
             if (user.getUserId().equals(value.getUserId())) {
-                throw new UserIdExistsException("User Id taken, Use a different User Id");
+                throw new UserIdException("User Id taken, Use a different User Id");
             }
         }
         users.add(user);
+    }
+
+    public Optional<User> getUserById(UUID userId){
+        return users.stream().filter(user -> user.getUserId().equals(userId)).findFirst();
     }
 
 }
