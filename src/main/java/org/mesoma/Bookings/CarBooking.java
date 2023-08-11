@@ -28,10 +28,6 @@ public class CarBooking {
         return bookingId;
     }
 
-    public void setBookingId(UUID bookingId) {
-        this.bookingId = bookingId;
-    }
-
     public User getUser() {
         return user;
     }
@@ -46,10 +42,6 @@ public class CarBooking {
 
     public LocalDateTime getDate() {
         return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
     }
 
     public boolean isCancelled() {
