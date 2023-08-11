@@ -5,11 +5,11 @@ import org.mesoma.Cars.Car;
 import java.util.List;
 
 public class CarBookingService {
-    private final CarBookingDAO carBookingDAO;
+    private final CarBookingDaoInterface carBookingDaoInterface;
     private final CarService carService;
 
-    public CarBookingService(CarBookingDAO carBookingDAO, CarService carService) {
-        this.carBookingDAO = carBookingDAO;
+    public CarBookingService(CarBookingDaoInterface carBookingDaoInterface, CarService carService) {
+        this.carBookingDaoInterface = carBookingDaoInterface;
         this.carService = carService;
     }
 
@@ -23,12 +23,12 @@ public class CarBookingService {
     }
 
     public List<CarBooking> getBookings(){
-        return (carBookingDAO.getBookings());
+        return (carBookingDaoInterface.getBookings());
     }
 
     //save booking to database
     public void saveBookingToDAO(CarBooking booking){
-        carBookingDAO.saveBooking(booking);
+        carBookingDaoInterface.saveBooking(booking);
     }
 
 }
