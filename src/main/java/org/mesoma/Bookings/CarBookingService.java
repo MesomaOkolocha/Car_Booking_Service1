@@ -23,7 +23,7 @@ public class CarBookingService {
     }
 
     public List<CarBooking> getBookings(){
-        return (carBookingDAO.bookings());
+        return (carBookingDAO.getBookings());
     }
 
     //save booking to database

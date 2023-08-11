@@ -14,7 +14,7 @@ public class CarBookingDAO implements CarBookingDaoInterface{
         bookings.add(booking);
     }
 
-    public List<CarBooking> bookings(){
+    public List<CarBooking> getBookings(){
         return bookings;
     }
 }

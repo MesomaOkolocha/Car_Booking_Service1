@@ -5,5 +5,5 @@ import java.util.List;
 public interface CarBookingDaoInterface {
     public void saveBooking(CarBooking booking);
 
-    public List<CarBooking> bookings();
+    public List<CarBooking> getBookings();
 }
