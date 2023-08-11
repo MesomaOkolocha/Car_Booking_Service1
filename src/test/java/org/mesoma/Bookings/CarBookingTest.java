@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.mesoma.Cars.Car;
 import org.mesoma.User.User;
 import org.mockito.MockedStatic;
+import org.mockito.Mockito;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
