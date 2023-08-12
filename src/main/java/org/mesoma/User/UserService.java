@@ -1,6 +1,7 @@
 package org.mesoma.User;
 
 import org.mesoma.utils.UserIdException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public class UserService {
     private final UserDaoInterface userDaoInterface;
 
 
-    public UserService(UserDaoInterface userDaoInterface){
+    public UserService(@Qualifier("userFakerDataAccessRepository") UserDaoInterface userDaoInterface){
         this.userDaoInterface = userDaoInterface;
     }
 
