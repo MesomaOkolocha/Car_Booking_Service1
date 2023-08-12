@@ -79,6 +79,10 @@ public class CarBooking {
         return isAvailable == booking.isAvailable && isCancelled == booking.isCancelled && Objects.equals(bookingId, booking.bookingId) && Objects.equals(user, booking.user) && Objects.equals(car, booking.car) && Objects.equals(date, booking.date);
     }
 
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(bookingId, user, car, isAvailable, isCancelled, date);

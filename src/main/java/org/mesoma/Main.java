@@ -9,17 +9,18 @@ import org.mesoma.Cars.CarService;
 import org.mesoma.User.User;
 import org.mesoma.User.UserFakerDataAccessRepository;
 import org.mesoma.User.UserService;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
+@SpringBootApplication
 public class Main {
-
     public static void main(String[] args) {
-        System.out.printf("hello");
+        SpringApplication.run(Main.class,args);
         // write your code here
         //Instantiate Data stores
         CarDAO carDAO = new CarDAO();
@@ -44,28 +45,30 @@ public class Main {
             System.out.println(menu);
             Scanner scanner = new Scanner(System.in);
             int input = scanner.nextInt();
-            switch (input){
-                case 1: bookCar(userService,carBookingService); break;
-                case 2: viewAllUserBookedCars(userService,carBookingService); break;
-                case 3: viewBookings(carBookingService);break;
-                case 4: viewAllAvailableCars(carBookingService);break;
-                case 5: viewAllAvailableElectricCars(carBookingService);break;
-                case 6: viewAllUsers(userService);break;
-                case 7:condition = false; break;
-                default:System.out.println(input + " is not a valid option ❌\n");break;
+            switch (input) {
+                case 1 -> bookCar(userService, carBookingService);
+                case 2 -> viewAllUserBookedCars(userService, carBookingService);
+                case 3 -> viewBookings(carBookingService);
+                case 4 -> viewAllAvailableCars(carBookingService);
+                case 5 -> viewAllAvailableElectricCars(carBookingService);
+                case 6 -> viewAllUsers(userService);
+                case 7 -> condition = false;
+                default -> System.out.println(input + " is not a valid option ❌\n");
             }
         }
     }
 
     private static String getMenu() {
-        return "\n"+
-                "1️⃣-Book Car\n" +
-                "2️⃣-View All User Booked cars\n" +
-                "3️⃣-View All bookings\n" +
-                "4️⃣-View Available Cars\n" +
-                "5️⃣-View Available Electric cars\n" +
-                "6️⃣-View All Users\n" +
-                "7️⃣-Exit\n";
+        return """
+
+                1️⃣-Book Car
+                2️⃣-View All User Booked cars
+                3️⃣-View All bookings
+                4️⃣-View Available Cars
+                5️⃣-View Available Electric cars
+                6️⃣-View All Users
+                7️⃣-Exit
+                """;
     }
 
     public static void viewAllUsers(UserService userService){
@@ -117,7 +120,7 @@ public class Main {
     }
 
     public static void bookCar(UserService userService, CarBookingService carBookingService){
-        if(carBookingService.getAllCars().size() == 0){
+        if(carBookingService.getAllCars().isEmpty()){
             System.out.println("No cars have been added yet");
         }else{
             List<Car> currentCars = carBookingService.getAllCars();
@@ -166,7 +169,7 @@ public class Main {
     }
 
     public static void viewAllAvailableCars(CarBookingService carBookingService){
-        if(carBookingService.getAllCars().size() == 0){
+        if(carBookingService.getAllCars().isEmpty()){
             System.out.println("No cars have been added yet");
         }else{
             List<Car> allCars = carBookingService.getAllCars();
@@ -175,7 +178,7 @@ public class Main {
     }
 
     public static void viewAllAvailableElectricCars(CarBookingService carBookingService){
-        if(carBookingService.getAllCars().size() == 0){
+        if(carBookingService.getAllCars().isEmpty()){
             System.out.println("No cars have been added yet");
         }else{
             List<Car> allElectricCars = carBookingService.getAllElectricCars();
@@ -184,9 +187,7 @@ public class Main {
     }
 
     private static void printAvailableCars(List<Car> currentCars) {
-        List<Car> availableElectricCars = currentCars.stream().filter(Car::isAvailable).collect(Collectors.toList());
+        List<Car> availableElectricCars = currentCars.stream().filter(Car::isAvailable).toList();
         availableElectricCars.forEach(System.out::println);
     }
-
-
 }
