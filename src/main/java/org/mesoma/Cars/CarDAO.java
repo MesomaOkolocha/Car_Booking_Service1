@@ -1,8 +1,10 @@
 package org.mesoma.Cars;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
-
+@Repository
 public class CarDAO implements CarDaoInterface {
     private final static List<Car> cars;
 
