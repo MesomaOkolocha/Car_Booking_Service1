@@ -2,8 +2,11 @@ package org.mesoma.Bookings;
 
 import org.mesoma.Cars.CarService;
 import org.mesoma.Cars.Car;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class CarBookingService {
     private final CarBookingDaoInterface carBookingDaoInterface;
     private final CarService carService;
