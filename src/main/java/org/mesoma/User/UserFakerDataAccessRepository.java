@@ -1,12 +1,13 @@
 package org.mesoma.User;
 import com.github.javafaker.Faker;
 import org.mesoma.utils.UserIdException;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@Repository
 public class UserFakerDataAccessRepository implements UserDaoInterface{
     static List<User> users = new ArrayList<>();
 

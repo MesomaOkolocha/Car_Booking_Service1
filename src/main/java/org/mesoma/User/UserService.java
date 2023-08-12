@@ -1,9 +1,12 @@
 package org.mesoma.User;
 
 import org.mesoma.utils.UserIdException;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.UUID;
 //Service class for User
+@Service
 public class UserService {
     private final UserDaoInterface userDaoInterface;
 

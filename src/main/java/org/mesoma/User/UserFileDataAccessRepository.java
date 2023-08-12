@@ -1,6 +1,7 @@
 package org.mesoma.User;
 
 import org.mesoma.utils.UserIdException;
+import org.springframework.stereotype.Repository;
 
 import java.io.File;
 import java.io.IOException;
