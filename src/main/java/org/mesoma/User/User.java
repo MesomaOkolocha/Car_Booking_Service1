@@ -25,6 +25,9 @@ public class User {
         return userId;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
 
     public void setUserId(UUID userId) {
         this.userId = userId;
