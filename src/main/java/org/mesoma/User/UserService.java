@@ -12,7 +12,7 @@ public class UserService {
     private final UserDaoInterface userDaoInterface;
 
 
-    public UserService(@Qualifier("userFakerDataAccessRepository") UserDaoInterface userDaoInterface){
+    public UserService(@Qualifier("userFaker") UserDaoInterface userDaoInterface){
         this.userDaoInterface = userDaoInterface;
     }
 
