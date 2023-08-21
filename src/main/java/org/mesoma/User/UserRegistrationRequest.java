@@ -1,4 +1,4 @@
 package org.mesoma.User;
 
-public record UserRegistrationRequest(String firstname) {
+public record UserRegistrationRequest(String name) {
 }

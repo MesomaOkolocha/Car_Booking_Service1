@@ -30,7 +30,7 @@ public class UserService {
     }
 
     public void registerNewUser(UserRegistrationRequest userRegistrationRequest){
-        User user = new User(userRegistrationRequest.firstname());
+        User user = new User(userRegistrationRequest.name());
         userDaoInterface.addNewUser(user);
     }
 }
