@@ -28,4 +28,9 @@ public class UserService {
     public void addNewUser(User user){
         userDaoInterface.addNewUser(user);
     }
+
+    public void registerNewUser(UserRegistrationRequest userRegistrationRequest){
+        User user = new User(userRegistrationRequest.firstname());
+        userDaoInterface.addNewUser(user);
+    }
 }
