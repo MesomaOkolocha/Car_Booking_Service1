@@ -1,9 +1,7 @@
 package org.mesoma.User;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -35,5 +33,10 @@ public class UserController {
             newUser = new User(firstName);
         }
         userService.addNewUser(newUser);
+    }
+
+    @PostMapping("api/users")
+    public void registerNewUser(@RequestBody UserRegistrationRequest userRegistrationRequest){
+        userService.registerNewUser(userRegistrationRequest);
     }
 }
