@@ -1,13 +1,21 @@
 package org.mesoma.User;
 //POJO for the user class to create users who want to use rental service
 
+import jakarta.persistence.*;
+
 import java.util.Objects;
 import java.util.UUID;
-
+@Entity
+@Table(name = "users")
 public class User {
-
+    @Id
+    @SequenceGenerator(name = "user_id_sequence", sequenceName = "user_id_sequence" )
+    @GeneratedValue(strategy = GenerationType.UUID, generator = "user_id_sequence")
     private UUID userId;
+    @Column(nullable = false)
     private String name;
+    public User() {
+    }
 
     //User provides first name, and we assign them a random userId
     public User(String name) {
