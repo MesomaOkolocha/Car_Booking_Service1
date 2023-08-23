@@ -33,7 +33,6 @@ public class Main {
         //instantiate service classes
         CarService carService = new CarService(carDAO);
         UserService userService = new UserService(userFakerDataAccessRepository);
-        userService.addNewUser(new User("Mamba"));
         CarBookingService carBookingService = new CarBookingService(carBookingDAO, carService);
         //add cars
         carService.addNewCar(toyota);
@@ -107,7 +106,7 @@ public class Main {
         }
         if(tracker != 0){
             try{
-                User user = userService.getUserById(UUID.fromString(input));
+                User user = userService.getUserById(Integer.parseInt(input));
                 response = "❌ user "+user.toString()+" has no cars booked";
             }catch (IllegalArgumentException e){
                 System.out.println("❌ invalid UserId");
