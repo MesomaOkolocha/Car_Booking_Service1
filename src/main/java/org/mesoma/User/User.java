@@ -2,16 +2,17 @@ package org.mesoma.User;
 //POJO for the user class to create users who want to use rental service
 
 import jakarta.persistence.*;
-
 import java.util.Objects;
 import java.util.UUID;
 @Entity
 @Table(name = "users")
 public class User {
     @Id
-    @SequenceGenerator(name = "user_id_sequence", sequenceName = "user_id_sequence" )
-    @GeneratedValue(strategy = GenerationType.UUID, generator = "user_id_sequence")
-    private UUID userId;
+    @SequenceGenerator(name = "user_id_sequence",
+            sequenceName = "user_id_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "user_id_sequence")
+    private Integer userId;
     @Column(nullable = false)
     private String name;
     public User() {
@@ -19,17 +20,16 @@ public class User {
 
     //User provides first name, and we assign them a random userId
     public User(String name) {
-        this.userId = UUID.randomUUID();
         this.name = name;
     }
 
     //This constructor is used when we are given users with userId and firstName provided
-    public User(UUID userId, String name) {
+    public User(Integer userId, String name) {
         this.userId = userId;
         this.name = name;
     }
 
-    public UUID getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
@@ -37,7 +37,7 @@ public class User {
         return name;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
