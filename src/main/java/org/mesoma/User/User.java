@@ -2,17 +2,17 @@ package org.mesoma.User;
 //POJO for the user class to create users who want to use rental service
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
+
 import java.util.Objects;
 import java.util.UUID;
 @Entity
 @Table(name = "users")
 public class User {
     @Id
-    @SequenceGenerator(name = "user_id_sequence",
-            sequenceName = "user_id_sequence")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "user_id_sequence")
-    private Integer userId;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private UUID userId;
     @Column(nullable = false)
     private String name;
     public User() {
@@ -24,12 +24,12 @@ public class User {
     }
 
     //This constructor is used when we are given users with userId and firstName provided
-    public User(Integer userId, String name) {
+    public User(UUID userId, String name) {
         this.userId = userId;
         this.name = name;
     }
 
-    public Integer getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 
@@ -37,7 +37,7 @@ public class User {
         return name;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(UUID userId) {
         this.userId = userId;
     }
 
