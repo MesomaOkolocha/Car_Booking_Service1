@@ -12,7 +12,7 @@ public class UserService {
     private final UserDaoInterface userDaoInterface;
 
 
-    public UserService(@Qualifier("userFaker") UserDaoInterface userDaoInterface){
+    public UserService(@Qualifier("jpa") UserDaoInterface userDaoInterface){
         this.userDaoInterface = userDaoInterface;
     }
 
@@ -20,7 +20,7 @@ public class UserService {
         return (userDaoInterface.getUsers());
     }
 
-    public User getUserById(UUID userId){
+    public User getUserById(Integer userId){
         return userDaoInterface.getUserById(userId).orElseThrow(() ->
                 new UserIdException("customer with id [%s] not found".formatted(userId))
         );

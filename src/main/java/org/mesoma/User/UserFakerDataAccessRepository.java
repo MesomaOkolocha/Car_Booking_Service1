@@ -32,7 +32,7 @@ public class UserFakerDataAccessRepository implements UserDaoInterface{
         users.add(user);
     }
 
-    public Optional<User> getUserById(UUID userId){
+    public Optional<User> getUserById(Integer userId){
         return users.stream().filter(user -> user.getUserId().equals(userId)).findFirst();
     }
 
