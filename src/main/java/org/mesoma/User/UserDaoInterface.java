@@ -8,5 +8,5 @@ public interface UserDaoInterface {
     List<User> getUsers();
     void addNewUser(User user);
 
-    Optional<User> getUserById(Integer userId);
+    Optional<User> getUserById(UUID userId);
 }

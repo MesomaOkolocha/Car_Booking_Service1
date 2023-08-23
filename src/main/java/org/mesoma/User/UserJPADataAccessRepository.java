@@ -25,7 +25,7 @@ public class UserJPADataAccessRepository implements UserDaoInterface{
     }
 
     @Override
-    public Optional<User> getUserById(Integer userId) {
+    public Optional<User> getUserById(UUID userId) {
         return userRepository.findById(userId);
     }
 }

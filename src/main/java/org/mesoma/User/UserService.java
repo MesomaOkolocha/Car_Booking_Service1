@@ -20,7 +20,7 @@ public class UserService {
         return (userDaoInterface.getUsers());
     }
 
-    public User getUserById(Integer userId){
+    public User getUserById(UUID userId){
         return userDaoInterface.getUserById(userId).orElseThrow(() ->
                 new UserIdException("customer with id [%s] not found".formatted(userId))
         );

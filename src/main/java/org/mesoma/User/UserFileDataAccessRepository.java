@@ -19,7 +19,7 @@ public class UserFileDataAccessRepository implements UserDaoInterface {
             Scanner scanner = new Scanner(FILE);
             while (scanner.hasNext()) {
                 String[] data = scanner.nextLine().split(",");
-                users.add(new User(Integer.parseInt(data[0]), data[1]));
+                users.add(new User(UUID.fromString(data[0]), data[1]));
             }
             scanner.close(); // Close the scanner after reading the file
         } catch (IOException e ) {
@@ -42,7 +42,7 @@ public class UserFileDataAccessRepository implements UserDaoInterface {
         users.add(user);
     }
 
-    public Optional<User> getUserById(Integer userId){
+    public Optional<User> getUserById(UUID userId){
         return users.stream().filter(user -> user.getUserId().equals(userId)).findFirst();
     }
 

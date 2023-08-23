@@ -20,12 +20,12 @@ public class UserController {
     }
 
     @GetMapping("api/users/{userId}")
-    public User getUserById(@PathVariable("userId") Integer userId){
+    public User getUserById(@PathVariable("userId") UUID userId){
         return userService.getUserById(userId);
     }
     @PostMapping("api/users/{name}/{userId}")
     public void addNewUser(@PathVariable("name") String firstName,
-                           @PathVariable(value = "userId", required = false) Integer userId){
+                           @PathVariable(value = "userId", required = false) UUID userId){
         User newUser;
         if (userId != null) {
             newUser = new User(userId, firstName);

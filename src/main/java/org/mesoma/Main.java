@@ -106,7 +106,7 @@ public class Main {
         }
         if(tracker != 0){
             try{
-                User user = userService.getUserById(Integer.parseInt(input));
+                User user = userService.getUserById(UUID.fromString(input));
                 response = "❌ user "+user.toString()+" has no cars booked";
             }catch (IllegalArgumentException e){
                 System.out.println("❌ invalid UserId");
