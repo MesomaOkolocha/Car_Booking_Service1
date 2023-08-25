@@ -1,7 +1,6 @@
 package org.mesoma.User;
 
 import org.mesoma.utils.ResourceNotFoundException;
-import org.mesoma.utils.UserIdException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 

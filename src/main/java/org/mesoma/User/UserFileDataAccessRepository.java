@@ -1,6 +1,5 @@
 package org.mesoma.User;
 
-import org.mesoma.utils.UserIdException;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
@@ -34,11 +33,6 @@ public class UserFileDataAccessRepository implements UserDaoInterface {
 
     public void addNewUser(User user){
         //check if UUID is not taken
-        for (User value : users) {
-            if (user.getUserId().equals(value.getUserId())) {
-                throw new UserIdException("User Id taken, Use a different User Id");
-            }
-        }
         users.add(user);
     }
 

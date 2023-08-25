@@ -1,6 +1,5 @@
 package org.mesoma.User;
 import com.github.javafaker.Faker;
-import org.mesoma.utils.UserIdException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
