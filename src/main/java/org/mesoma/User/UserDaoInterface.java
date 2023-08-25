@@ -9,4 +9,7 @@ public interface UserDaoInterface {
     void addNewUser(User user);
 
     Optional<User> getUserById(UUID userId);
+
+    void deleteCustomerById(UUID userId);
+    boolean existsPersonWithId(UUID id);
 }

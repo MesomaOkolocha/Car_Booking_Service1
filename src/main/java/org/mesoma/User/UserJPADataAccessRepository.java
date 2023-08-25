@@ -28,4 +28,14 @@ public class UserJPADataAccessRepository implements UserDaoInterface{
     public Optional<User> getUserById(UUID userId) {
         return userRepository.findById(userId);
     }
+
+    @Override
+    public void deleteCustomerById(UUID userId) {
+        userRepository.deleteById(userId);
+    }
+
+    @Override
+    public boolean existsPersonWithId(UUID id) {
+        return userRepository.existsUserByUserId(id);
+    }
 }

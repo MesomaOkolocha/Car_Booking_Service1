@@ -46,4 +46,15 @@ public class UserFileDataAccessRepository implements UserDaoInterface {
         return users.stream().filter(user -> user.getUserId().equals(userId)).findFirst();
     }
 
+    @Override
+    public void deleteCustomerById(UUID userId) {
+        users.stream().filter(user -> user.getUserId().equals(userId)).
+                findFirst().ifPresent(users::remove);
+    }
+
+    @Override
+    public boolean existsPersonWithId(UUID id) {
+        return users.stream().anyMatch(user -> user.getUserId().equals(id));
+    }
+
 }

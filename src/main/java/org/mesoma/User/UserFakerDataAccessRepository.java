@@ -23,17 +23,22 @@ public class UserFakerDataAccessRepository implements UserDaoInterface{
     }
 
     public void addNewUser(User user){
-        //check if UUID is not taken
-        for (User value : users) {
-            if (user.getUserId().equals(value.getUserId())) {
-                throw new UserIdException("User Id taken, Use a different User Id");
-            }
-        }
         users.add(user);
     }
 
     public Optional<User> getUserById(UUID userId){
         return users.stream().filter(user -> user.getUserId().equals(userId)).findFirst();
+    }
+
+    @Override
+    public void deleteCustomerById(UUID userId) {
+        users.stream().filter(user -> user.getUserId().equals(userId)).
+                findFirst().ifPresent(users::remove);
+    }
+
+    @Override
+    public boolean existsPersonWithId(UUID id) {
+        return users.stream().anyMatch(user -> user.getUserId().equals(id));
     }
 
 }

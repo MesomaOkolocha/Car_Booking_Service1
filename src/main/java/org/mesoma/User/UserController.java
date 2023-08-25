@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("api/users")
 public class UserController {
     private final UserService userService;
 
@@ -14,16 +15,16 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("api/users")
+    @GetMapping()
     public List<User> getUsers(){
         return (userService.getUsers());
     }
 
-    @GetMapping("api/users/{userId}")
+    @GetMapping("{userId}")
     public User getUserById(@PathVariable("userId") UUID userId){
         return userService.getUserById(userId);
     }
-    @PostMapping("api/users/{name}/{userId}")
+    @PostMapping("{name}/{userId}")
     public void addNewUser(@PathVariable("name") String firstName,
                            @PathVariable(value = "userId", required = false) UUID userId){
         User newUser;
@@ -35,8 +36,14 @@ public class UserController {
         userService.addNewUser(newUser);
     }
 
-    @PostMapping("api/users")
+    @PostMapping()
     public void registerNewUser(@RequestBody UserRegistrationRequest userRegistrationRequest){
         userService.registerNewUser(userRegistrationRequest);
+    }
+
+    @DeleteMapping("{userId}")
+    public void deleteUserById(@PathVariable ("userId") UUID userId){
+        userService.deleteUserById(userId);
+
     }
 }

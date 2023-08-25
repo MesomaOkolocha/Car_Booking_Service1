@@ -1,5 +1,6 @@
 package org.mesoma.User;
 
+import org.mesoma.utils.ResourceNotFoundException;
 import org.mesoma.utils.UserIdException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class UserService {
 
     public User getUserById(UUID userId){
         return userDaoInterface.getUserById(userId).orElseThrow(() ->
-                new UserIdException("customer with id [%s] not found".formatted(userId))
+                new ResourceNotFoundException("customer with id [%s] not found".formatted(userId))
         );
     }
     public void addNewUser(User user){
@@ -32,5 +33,15 @@ public class UserService {
     public void registerNewUser(UserRegistrationRequest userRegistrationRequest){
         User user = new User(userRegistrationRequest.name());
         userDaoInterface.addNewUser(user);
+    }
+
+    public void deleteUserById(UUID userId){
+        //check if id exists
+        if (!userDaoInterface.existsPersonWithId(userId)){
+            throw new ResourceNotFoundException(
+                    "user with id [%s] not found".formatted(userId)
+            );
+        }
+        userDaoInterface.deleteCustomerById(userId);
     }
 }
