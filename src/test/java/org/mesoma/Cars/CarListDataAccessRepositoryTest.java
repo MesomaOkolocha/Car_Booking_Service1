@@ -6,12 +6,12 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-class CarDAOTest {
-    private CarDAO carDAO;
+class CarListDataAccessRepositoryTest {
+    private CarListDataAccessRepository carListDataAccessRepository;
 
     @BeforeEach
     public void setUp() {
-        carDAO = new CarDAO();
+        carListDataAccessRepository = new CarListDataAccessRepository();
     }
 
     @Test
@@ -19,10 +19,10 @@ class CarDAOTest {
         Car car1 = new Car("ABC123", 50.0, Brand.TOYOTA, true);
         Car car2 = new Car("XYZ456", 60.0, Brand.TESLA, false);
 
-        carDAO.saveCar(car1);
-        carDAO.saveCar(car2);
+        carListDataAccessRepository.registerCar(car1);
+        carListDataAccessRepository.registerCar(car2);
 
-        List<Car> cars = carDAO.getCars();
+        List<Car> cars = carListDataAccessRepository.getCars();
 
         assertThat(cars).containsExactly(car1,car2);
     }

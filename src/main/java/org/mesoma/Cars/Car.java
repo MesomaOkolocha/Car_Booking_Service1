@@ -1,18 +1,40 @@
 package org.mesoma.Cars;
 //Pojo for cars class
 
-import java.util.Objects;
+import jakarta.persistence.*;
 
+import java.util.Objects;
+@Entity
+@Table(name = "cars")
 public class Car {
+    @Id
+    @SequenceGenerator(name = "customer_id_sequence",
+            sequenceName = "customer_id_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "customer_id_sequence")
+    private Integer Id;
+    @Column(nullable = false)
     private String regNumber;
+    @Column(nullable = false)
     private double rentalPrice;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Brand brand;
+    @Column(nullable = false)
     private boolean isElectric;
+    @Column(nullable = false)
     private boolean isAvailable;
 
     public Car() {
     }
-
+    public Car(Integer id, String regNumber, double rentalPrice, Brand brand, boolean isElectric) {
+        Id = id;
+        this.regNumber = regNumber;
+        this.rentalPrice = rentalPrice;
+        this.brand = brand;
+        this.isElectric = isElectric;
+        this.isAvailable = false;
+    }
     public Car(String regNumber, double rentalPrice, Brand brand, boolean isElectric) {
         this.regNumber = regNumber;
         this.rentalPrice = rentalPrice;

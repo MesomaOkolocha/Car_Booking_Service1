@@ -9,12 +9,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CarServiceTest {
     private CarService carService;
-    private CarDAO carDAO;
+    private CarListDataAccessRepository carListDataAccessRepository;
 
     @BeforeEach
     public void setUp() {
-        carDAO = new InMemoryCarDAO(); // Use the in-memory implementation
-        carService = new CarService(carDAO);
+        carListDataAccessRepository = new InMemoryCarListDataAccessRepository(); // Use the in-memory implementation
+        carService = new CarService(carListDataAccessRepository);
     }
 
     @Test
@@ -23,7 +23,7 @@ public class CarServiceTest {
 
         carService.addNewCar(car);
 
-        List<Car> cars = carDAO.getCars();
+        List<Car> cars = carListDataAccessRepository.getCars();
         assertThat(cars).containsExactly(car);
         assertThat(car.isAvailable()).isTrue();
     }
@@ -56,11 +56,11 @@ public class CarServiceTest {
     }
 
     // In-memory implementation of CarDAO for testing purposes
-    private static class InMemoryCarDAO extends CarDAO{
+    private static class InMemoryCarListDataAccessRepository extends CarListDataAccessRepository {
         private final List<Car> cars = new ArrayList<>();
 
         @Override
-        public void saveCar(Car car) {
+        public void registerCar(Car car) {
             cars.add(car);
         }
 
