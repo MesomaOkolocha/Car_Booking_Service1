@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-@Repository("jpa")
+@Repository("UserJPA")
 public class UserJPADataAccessRepository implements UserDaoInterface{
 
     private final UserRepository userRepository;

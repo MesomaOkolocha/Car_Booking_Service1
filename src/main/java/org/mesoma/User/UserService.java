@@ -12,7 +12,7 @@ public class UserService {
     private final UserDaoInterface userDaoInterface;
 
 
-    public UserService(@Qualifier("jpa") UserDaoInterface userDaoInterface){
+    public UserService(@Qualifier("UserJPA") UserDaoInterface userDaoInterface){
         this.userDaoInterface = userDaoInterface;
     }
 

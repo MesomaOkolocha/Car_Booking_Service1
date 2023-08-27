@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-@Repository("userFaker")
+@Repository("UserFaker")
 public class UserFakerDataAccessRepository implements UserDaoInterface{
     static List<User> users = new ArrayList<>();
 

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.*;
 
 //Data access class for users, we are going to store users using an array
-@Repository("file")
+@Repository("UserFile")
 public class UserFileDataAccessRepository implements UserDaoInterface {
 
     static List<User> users = new ArrayList<>();
