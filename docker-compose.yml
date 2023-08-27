@@ -9,7 +9,7 @@ services:
     volumes:
       - postgres:/data/postgres
     ports:
-      - "5433:5432"
+      - "5435:5432"
     networks:
       - postgres
     restart: unless-stopped
@@ -23,7 +23,7 @@ services:
     volumes:
       - pgadmin:/var/lib/pgadmin
     ports:
-      - "5051:80"
+      - "5052:80"
     networks:
       - postgres
     restart: unless-stopped
