@@ -4,7 +4,7 @@ import org.mesoma.Bookings.CarBookingDAO;
 import org.mesoma.Bookings.CarBookingService;
 import org.mesoma.Cars.Brand;
 import org.mesoma.Cars.Car;
-import org.mesoma.Cars.CarDAO;
+import org.mesoma.Cars.CarListDataAccessRepository;
 import org.mesoma.Cars.CarService;
 import org.mesoma.User.User;
 import org.mesoma.User.UserFakerDataAccessRepository;
@@ -23,7 +23,7 @@ public class Main {
         SpringApplication.run(Main.class,args);
         // write your code here
         //Instantiate Data stores
-        CarDAO carDAO = new CarDAO();
+        CarListDataAccessRepository carListDataAccessRepository = new CarListDataAccessRepository();
         UserFakerDataAccessRepository userFakerDataAccessRepository = new UserFakerDataAccessRepository();
         CarBookingDAO carBookingDAO = new CarBookingDAO();
         //create new cars
@@ -31,7 +31,7 @@ public class Main {
         Car audi = new Car("1235",80.05,Brand.AUDI, true);
         Car hyundai = new Car("1236",80.05,Brand.HYUNDAI, false);
         //instantiate service classes
-        CarService carService = new CarService(carDAO);
+        CarService carService = new CarService(carListDataAccessRepository);
         UserService userService = new UserService(userFakerDataAccessRepository);
         CarBookingService carBookingService = new CarBookingService(carBookingDAO, carService);
         //add cars
