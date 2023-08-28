@@ -3,7 +3,8 @@ package org.mesoma.Bookings;
 import java.util.List;
 
 public interface CarBookingDaoInterface {
-    public void saveBooking(CarBooking booking);
+    void saveBooking(CarBooking booking);
 
-    public List<CarBooking> getBookings();
+    List<CarBooking> getBookings();
+
 }

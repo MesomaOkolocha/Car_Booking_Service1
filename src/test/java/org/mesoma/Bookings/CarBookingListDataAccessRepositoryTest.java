@@ -9,13 +9,13 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import java.util.UUID;
-public class CarBookingDAOTest {
+public class CarBookingListDataAccessRepositoryTest {
 
-    private CarBookingDAO carBookingDAO;
+    private CarBookingListDataAccessRepository carBookingListDataAccessRepository;
 
     @BeforeEach
     public void setUp() {
-        carBookingDAO = new CarBookingDAO();
+        carBookingListDataAccessRepository = new CarBookingListDataAccessRepository();
     }
 
     @Test
@@ -24,9 +24,9 @@ public class CarBookingDAOTest {
         Car car = new Car("ABC123", 100.0, Brand.TOYOTA, false);
         CarBooking booking = new CarBooking(UUID.randomUUID(), user, car);
 
-        carBookingDAO.saveBooking(booking);
+        carBookingListDataAccessRepository.saveBooking(booking);
 
-        List<CarBooking> bookings = carBookingDAO.getBookings();
+        List<CarBooking> bookings = carBookingListDataAccessRepository.getBookings();
         assertThat(bookings).containsExactly(booking);
     }
 
@@ -36,12 +36,12 @@ public class CarBookingDAOTest {
         Car car = new Car("ABC123", 100.0, Brand.TOYOTA, false);
         CarBooking expectedBooking = new CarBooking(UUID.randomUUID(), user, car);
         // Mocking behavior to return expectedBooking
-        CarBookingDAO carBookingDAOSpy = spy(carBookingDAO);
-        doReturn(List.of(expectedBooking)).when(carBookingDAOSpy).getBookings();
+        CarBookingListDataAccessRepository carBookingListDataAccessRepositorySpy = spy(carBookingListDataAccessRepository);
+        doReturn(List.of(expectedBooking)).when(carBookingListDataAccessRepositorySpy).getBookings();
 
-        List<CarBooking> actualBookings = carBookingDAOSpy.getBookings();
+        List<CarBooking> actualBookings = carBookingListDataAccessRepositorySpy.getBookings();
 
         assertThat(actualBookings).containsExactly(expectedBooking);
-        verify(carBookingDAOSpy, times(1)).getBookings();
+        verify(carBookingListDataAccessRepositorySpy, times(1)).getBookings();
     }
 }

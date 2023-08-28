@@ -1,19 +1,44 @@
 package org.mesoma.Bookings;
 
+import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UuidGenerator;
 import org.mesoma.Cars.Car;
 import org.mesoma.User.User;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
-
+@Entity
+@Table(name = "car_booking")
 public class CarBooking {
+    @Id
+    @GeneratedValue(generator = "booking_uuid")
+    @GenericGenerator(name = "booking_uuid")
+    @UuidGenerator
     private UUID bookingId;
+    @ManyToOne
+    @JoinColumn(name = "user_details", referencedColumnName = "userId")
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "car_details", referencedColumnName = "id")
     private Car car;
+    @Column(nullable = false)
     private boolean isAvailable;
+    @Column(nullable = false)
     private boolean isCancelled;
+    @Column(nullable = false)
     private LocalDateTime date;
+
+    public CarBooking(){}
+
+    public CarBooking(User user, Car car) {
+        this.user = user;
+        this.isAvailable = car.isAvailable();
+        this.car = car;
+        this.date = LocalDateTime.now();
+        this.isCancelled = false;
+    }
 
     public CarBooking(UUID bookingId, User user, Car car) {
         this.bookingId = bookingId;
