@@ -1,6 +1,6 @@
 package org.mesoma;
 import org.mesoma.Bookings.CarBooking;
-import org.mesoma.Bookings.CarBookingDAO;
+import org.mesoma.Bookings.CarBookingListDataAccessRepository;
 import org.mesoma.Bookings.CarBookingService;
 import org.mesoma.Cars.Brand;
 import org.mesoma.Cars.Car;
@@ -25,7 +25,7 @@ public class Main {
         //Instantiate Data stores
         CarListDataAccessRepository carListDataAccessRepository = new CarListDataAccessRepository();
         UserFakerDataAccessRepository userFakerDataAccessRepository = new UserFakerDataAccessRepository();
-        CarBookingDAO carBookingDAO = new CarBookingDAO();
+        CarBookingListDataAccessRepository carBookingListDataAccessRepository = new CarBookingListDataAccessRepository();
         //create new cars
         Car toyota = new Car("1234",80.05, Brand.TOYOTA, true);
         Car audi = new Car("1235",80.05,Brand.AUDI, true);
@@ -33,7 +33,7 @@ public class Main {
         //instantiate service classes
         CarService carService = new CarService(carListDataAccessRepository);
         UserService userService = new UserService(userFakerDataAccessRepository);
-        CarBookingService carBookingService = new CarBookingService(carBookingDAO, carService);
+        CarBookingService carBookingService = new CarBookingService(carBookingListDataAccessRepository, carService,userService);
         //add cars
         carService.addNewCar(toyota);
         carService.addNewCar(audi);
