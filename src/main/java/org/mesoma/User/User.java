@@ -3,6 +3,7 @@ package org.mesoma.User;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -11,7 +12,8 @@ import java.util.UUID;
 public class User {
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    @GenericGenerator(name = "uuid")
+    @UuidGenerator
     private UUID userId;
     @Column(nullable = false)
     private String name;
